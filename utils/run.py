@@ -219,12 +219,22 @@ def start(tx, creation_code):
     decompile(runtimecode)
     print('\n\n}')
 
+    
+
+if(len(sys.argv) > 1):
+    af = open('CURRENT_BLOCK', 'r')
+    new_num = int(af.read()) + 5000
+    af.close()
+    bf = open('CURRENT_BLOCK', 'w')
+    bf.write(str(new_num))
+    bf.close()
+    sys.exit(0)
 
 w3 = Web3(Web3.HTTPProvider('https://polygon-rpc.com'))
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 old_blocknumber = int(open('CURRENT_BLOCK', 'r').read())
-new_blocknumber = old_blocknumber + 10000
+new_blocknumber = old_blocknumber + 5000
 bf = open('CURRENT_BLOCK', 'w')
 bf.write(str(new_blocknumber))
 bf.close()
