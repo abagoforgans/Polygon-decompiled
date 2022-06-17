@@ -223,7 +223,7 @@ def start(tx, creation_code):
 
 if(len(sys.argv) > 1):
     af = open('CURRENT_BLOCK', 'r')
-    new_num = int(af.read()) + 5000
+    new_num = int(af.read()) + 10000
     af.close()
     bf = open('CURRENT_BLOCK', 'w')
     bf.write(str(new_num))
@@ -233,11 +233,8 @@ if(len(sys.argv) > 1):
 w3 = Web3(Web3.HTTPProvider('https://polygon-rpc.com'))
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
-old_blocknumber = int(open('CURRENT_BLOCK', 'r').read())
-new_blocknumber = old_blocknumber + 5000
-bf = open('CURRENT_BLOCK', 'w')
-bf.write(str(new_blocknumber))
-bf.close()
+new_blocknumber = int(open('CURRENT_BLOCK', 'r').read())
+old_blocknumber = new_blocknumber - 10000
 
 for blocknumber in range(old_blocknumber, new_blocknumber):
     sys.stdout = sys.__stdout__
